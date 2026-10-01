@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>World Problem Solver</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            color: #1f2937;
+        }
+
+        header {
+            background: #111827;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 32px;
+        }
+
+        header p {
+            margin-top: 8px;
+            color: #cbd5e1;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+        }
+
+        h2 {
+            margin-bottom: 15px;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 180px;
+            padding: 15px;
+            border: 1px solid #d1d5db;
+            border-radius: 10px;
+            font-size: 16px;
+            resize: vertical;
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 13px 25px;
+            border: none;
+            border-radius: 10px;
+            background: #2563eb;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        #result {
+            margin-top: 25px;
+            padding: 20px;
+            background: #f1f5f9;
+            border-radius: 10px;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>🌍 World Problem Solver</h1>
+        <p>Turn real-world problems into practical solutions</p>
+    </header>
+
+    <div class="container">
+
+        <div class="card">
+
+            <h2>Describe the Problem</h2>
+
+            <p style="margin-bottom: 15px;">
+                Enter a real-world problem and our system will help generate a solution.
+            </p>
+
+            <textarea
+                id="problem"
+                placeholder="Example: People in my area waste a lot of water because they don't know how much they consume..."
+            ></textarea>
+
+            <button onclick="findSolution()">
+                🚀 Find Solution
+            </button>
+
+            <div id="result"></div>
+
+        </div>
+
+    </div>
+
+    <script>
+        async function findSolution() {
+
+            const problem = document.getElementById("problem").value;
+            const result = document.getElementById("result");
+
+            if (problem.trim() === "") {
+                alert("Please describe a problem first.");
+                return;
+            }
+
+            result.style.display = "block";
+            result.innerHTML = "⏳ Finding solution...";
+
+            try {
+
+                const response = await fetch("/solve", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        problem: problem
+                    })
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    result.innerHTML =
+                        "❌ " + (data.error || "Something went wrong.");
+                    return;
+                }
+
+                result.innerHTML = `
+                    <h2>💡 Solution</h2>
+
+                    <p>
+                        <strong>Problem:</strong>
+                        ${data.problem}
+                    </p>
+
+                    <p>
+                        <strong>Analysis:</strong>
+                        ${data.analysis}
+                    </p>
+
+                    <p>
+                        <strong>Solution:</strong>
+                        ${data.solution}
+                    </p>
+
+                    <h3>Features</h3>
+
+                    <ul>
+                        ${data.features.map(
+                            feature => `<li>${feature}</li>`
+                        ).join("")}
+                    </ul>
+                `;
+
+            } catch (error) {
+
+                result.innerHTML =
+                    "❌ Server se connection nahi ho raha.";
+
+                console.error(error);
+            }
+        }
+    </script>
+
+</body>
+</html>
