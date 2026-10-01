@@ -1,1083 +1,2558 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>GreenCare Waste Management</title>
+    <title>GreenCare | Smart Waste Management</title>
 
-<style>
+    <script src="https://cdn.tailwindcss.com"></script>
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-body {
-    font-family: Arial, sans-serif;
-    background: #f1f8ee;
-    color: #17351f;
-}
+    <style>
+        * {
+            box-sizing: border-box;
+        }
 
-/* ================= HEADER ================= */
+        html {
+            scroll-behavior: smooth;
+        }
 
-header {
-    background: linear-gradient(135deg, #176b2c, #2e8b57);
-    color: white;
-    padding: 35px 20px;
-    text-align: center;
-}
+        body {
+            font-family: "Inter", sans-serif;
+            background: #f5f9f6;
+            color: #17221a;
+        }
 
-header h1 {
-    font-size: 40px;
-}
+        .gradient-bg {
+            background: linear-gradient(135deg, #064e3b, #047857, #10b981);
+        }
 
-header p {
-    margin-top: 10px;
-    font-size: 18px;
-}
+        .hero-bg {
+            background:
+                radial-gradient(circle at top right, rgba(52,211,153,.25), transparent 35%),
+                radial-gradient(circle at bottom left, rgba(16,185,129,.18), transparent 35%),
+                linear-gradient(135deg, #022c22, #064e3b 55%, #047857);
+        }
 
-/* ================= NAV ================= */
+        .glass {
+            background: rgba(255,255,255,.90);
+            backdrop-filter: blur(12px);
+        }
 
-nav {
-    background: white;
-    padding: 15px;
-    text-align: center;
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-}
+        .card {
+            background: white;
+            border-radius: 20px;
+            border: 1px solid #e5eee8;
+            box-shadow: 0 10px 30px rgba(15, 70, 45, .07);
+        }
 
-nav a {
-    text-decoration: none;
-    color: #176b2c;
-    font-weight: bold;
-    margin: 0 12px;
-}
+        .stat-card {
+            transition: all .25s ease;
+        }
 
-/* ================= MAIN ================= */
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 35px rgba(15, 70, 45, .12);
+        }
 
-.container {
-    max-width: 1150px;
-    margin: auto;
-    padding: 30px 20px;
-}
+        .nav-link {
+            transition: .2s;
+        }
 
-.section {
-    margin-bottom: 35px;
-}
+        .nav-link:hover {
+            color: #059669;
+        }
 
-.card {
-    background: white;
-    padding: 30px;
-    border-radius: 20px;
-    box-shadow: 0 6px 25px rgba(0,0,0,0.07);
-    border: 1px solid #dcebd8;
-}
+        .btn {
+            transition: all .2s ease;
+        }
 
-h2 {
-    color: #176b2c;
-    margin-bottom: 15px;
-}
+        .btn:hover {
+            transform: translateY(-1px);
+        }
 
-h3 {
-    color: #176b2c;
-    margin-bottom: 12px;
-}
+        .input {
+            width: 100%;
+            border: 1px solid #d7e3dc;
+            border-radius: 12px;
+            padding: 12px 14px;
+            outline: none;
+            background: #fff;
+            transition: .2s;
+        }
 
-/* ================= GRID ================= */
+        .input:focus {
+            border-color: #10b981;
+            box-shadow: 0 0 0 3px rgba(16,185,129,.12);
+        }
 
-.grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 25px;
-}
+        .section-title {
+            color: #064e3b;
+        }
 
-/* ================= FORMS ================= */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 5px 10px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 700;
+        }
 
-label {
-    display: block;
-    margin-top: 15px;
-    margin-bottom: 6px;
-    font-weight: bold;
-}
+        .hidden-section {
+            display: none;
+        }
 
-input,
-select,
-textarea {
-    width: 100%;
-    padding: 13px;
-    border: 1px solid #c8dcc8;
-    border-radius: 10px;
-    font-size: 15px;
-    font-family: Arial, sans-serif;
-}
+        .mobile-menu {
+            display: none;
+        }
 
-textarea {
-    min-height: 120px;
-    resize: vertical;
-}
+        .mobile-menu.show {
+            display: block;
+        }
 
-button {
-    margin-top: 18px;
-    padding: 13px 25px;
-    border: none;
-    border-radius: 10px;
-    background: #238636;
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-}
+        .progress-bar {
+            height: 10px;
+            border-radius: 999px;
+            background: #e6f1eb;
+            overflow: hidden;
+        }
 
-button:hover {
-    background: #176b2c;
-}
+        .progress-fill {
+            height: 100%;
+            border-radius: 999px;
+            background: linear-gradient(90deg, #059669, #34d399);
+        }
 
-button:disabled {
-    background: #9dbca3;
-}
+        .preview-image {
+            max-height: 220px;
+            object-fit: cover;
+            border-radius: 14px;
+        }
 
-/* ================= RESULT ================= */
+        .toast {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            z-index: 9999;
+            max-width: 360px;
+            padding: 14px 18px;
+            border-radius: 14px;
+            color: white;
+            box-shadow: 0 15px 40px rgba(0,0,0,.2);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: .3s;
+        }
 
-.result {
-    display: none;
-    margin-top: 20px;
-    padding: 20px;
-    border-radius: 15px;
-    background: #edf8eb;
-    line-height: 1.7;
-}
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
 
-.success {
-    color: #176b2c;
-    font-weight: bold;
-}
+        .toast.success {
+            background: #059669;
+        }
 
-.error {
-    color: #c62828;
-    font-weight: bold;
-}
+        .toast.error {
+            background: #dc2626;
+        }
 
-.solution {
-    white-space: pre-wrap;
-    margin-top: 15px;
-    line-height: 1.8;
-}
+        .toast.info {
+            background: #2563eb;
+        }
 
-/* ================= FLOWCHART ================= */
+        .loading {
+            opacity: .6;
+            pointer-events: none;
+        }
 
-.flowchart {
-    text-align: center;
-}
+        .rank-1 {
+            background: linear-gradient(135deg, #fff7cc, #fffdf1);
+        }
 
-.flow-step {
-    background: #edf8eb;
-    border: 1px solid #d6ead1;
-    padding: 20px;
-    margin: 10px auto;
-    border-radius: 15px;
-    max-width: 600px;
-}
+        .rank-2 {
+            background: linear-gradient(135deg, #f1f5f9, #ffffff);
+        }
 
-.flow-step h3 {
-    margin-bottom: 6px;
-}
-
-.flow-arrow {
-    font-size: 28px;
-    margin: 5px;
-}
-
-/* ================= AWARENESS ================= */
-
-.awareness {
-    background: linear-gradient(135deg, #f7fff0, #e7f6df);
-}
-
-.awareness-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    margin-top: 20px;
-}
-
-.awareness-box {
-    padding: 25px;
-    border-radius: 18px;
-    background: white;
-    text-align: center;
-    border: 1px solid #d6ead1;
-}
-
-.awareness-box .icon {
-    font-size: 45px;
-    margin-bottom: 12px;
-}
-
-/* ================= FOOTER ================= */
-
-footer {
-    margin-top: 30px;
-    background: #14532d;
-    color: white;
-    text-align: center;
-    padding: 30px;
-}
-
-/* ================= MOBILE ================= */
-
-@media (max-width: 750px) {
-
-    .grid {
-        grid-template-columns: 1fr;
-    }
-
-    .awareness-grid {
-        grid-template-columns: 1fr;
-    }
-
-    header h1 {
-        font-size: 30px;
-    }
-
-    nav a {
-        display: inline-block;
-        margin: 7px;
-    }
-}
-
-</style>
+        .rank-3 {
+            background: linear-gradient(135deg, #fff1e6, #ffffff);
+        }
+    </style>
 </head>
-
 
 <body>
 
-<!-- ================= HEADER ================= -->
+<!-- ========================================================= -->
+<!-- NAVBAR -->
+<!-- ========================================================= -->
 
-<header>
+<header class="sticky top-0 z-50 glass border-b border-green-100">
 
-    <h1>🌿 GreenCare</h1>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-    <p>
-        Smart Waste Management for a Cleaner & Greener Community
-    </p>
+        <div class="h-16 flex items-center justify-between">
 
+            <a href="#home" class="flex items-center gap-3">
+                <div class="w-11 h-11 rounded-xl gradient-bg text-white flex items-center justify-center text-2xl">
+                    🌿
+                </div>
+
+                <div>
+                    <div class="font-extrabold text-xl text-green-900">
+                        GreenCare
+                    </div>
+
+                    <div class="text-xs text-gray-500">
+                        Smart Waste Management
+                    </div>
+                </div>
+            </a>
+
+            <!-- Desktop Navigation -->
+            <nav class="hidden lg:flex items-center gap-6 text-sm font-semibold">
+
+                <a href="#dashboard" class="nav-link">Dashboard</a>
+                <a href="#report" class="nav-link">Report Waste</a>
+                <a href="#pickup" class="nav-link">Pickup</a>
+                <a href="#track" class="nav-link">Track</a>
+                <a href="#rewards" class="nav-link">Rewards</a>
+                <a href="#ai" class="nav-link">AI Assistant</a>
+                <a href="#admin" class="nav-link">Admin</a>
+
+            </nav>
+
+            <button
+                id="mobileMenuBtn"
+                class="lg:hidden text-2xl text-green-800">
+                ☰
+            </button>
+
+        </div>
+
+        <!-- Mobile Navigation -->
+        <div id="mobileMenu" class="mobile-menu lg:hidden pb-4">
+
+            <div class="flex flex-col gap-3 text-sm font-semibold">
+
+                <a href="#dashboard" class="nav-link">Dashboard</a>
+                <a href="#report" class="nav-link">Report Waste</a>
+                <a href="#pickup" class="nav-link">Pickup</a>
+                <a href="#track" class="nav-link">Track</a>
+                <a href="#rewards" class="nav-link">Rewards</a>
+                <a href="#ai" class="nav-link">AI Assistant</a>
+                <a href="#admin" class="nav-link">Admin</a>
+
+            </div>
+
+        </div>
+
+    </div>
 </header>
 
 
-<!-- ================= NAVIGATION ================= -->
+<!-- ========================================================= -->
+<!-- HERO -->
+<!-- ========================================================= -->
 
-<nav>
+<section id="home" class="hero-bg text-white">
 
-    <a href="#report">📝 Report Issue</a>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
 
-    <a href="#pickup">🚛 Pickup</a>
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
 
-    <a href="#track">🔍 Track</a>
+            <div>
 
-    <a href="#ai">🤖 AI Assistant</a>
+                <span class="badge bg-green-400/20 text-green-200 border border-green-300/20 mb-5">
+                    🌍 AI-Powered Sustainable Community
+                </span>
 
-    <a href="#awareness">🌸 Awareness</a>
+                <h1 class="text-4xl md:text-6xl font-extrabold leading-tight">
+                    Cleaner Cities.
+                    <span class="text-green-300">Greener Future.</span>
+                </h1>
 
-    <a href="#flowchart">🔄 How It Works</a>
+                <p class="mt-6 text-green-100 text-lg leading-8 max-w-xl">
+                    GreenCare connects citizens, waste collection teams and administrators
+                    through one smart platform for reporting, tracking and solving waste problems.
+                </p>
 
-</nav>
+                <div class="mt-8 flex flex-wrap gap-4">
 
+                    <a
+                        href="#report"
+                        class="btn bg-white text-green-800 font-bold px-6 py-3 rounded-xl shadow-lg">
+                        🗑️ Report Waste
+                    </a>
 
-<div class="container">
+                    <a
+                        href="#dashboard"
+                        class="btn border border-green-300/40 bg-green-900/30 text-white font-bold px-6 py-3 rounded-xl">
+                        📊 View Impact
+                    </a>
 
+                </div>
 
-<!-- ================================================= -->
-<!-- REPORT WASTE ISSUE -->
-<!-- ================================================= -->
+                <div class="mt-8 grid grid-cols-3 gap-4 max-w-lg">
 
-<section class="section" id="report">
+                    <div>
+                        <div class="text-2xl font-extrabold">24/7</div>
+                        <div class="text-xs text-green-200">Reporting</div>
+                    </div>
 
-<div class="card">
+                    <div>
+                        <div class="text-2xl font-extrabold">AI</div>
+                        <div class="text-xs text-green-200">Assistance</div>
+                    </div>
 
-<h2>📝 Report Waste Issue</h2>
+                    <div>
+                        <div class="text-2xl font-extrabold">🌱</div>
+                        <div class="text-xs text-green-200">Rewards</div>
+                    </div>
 
-<p>
-Report garbage, plastic waste, overflowing bins or illegal dumping.
-</p>
+                </div>
 
+            </div>
 
-<div class="grid">
+            <div class="hidden md:block">
 
-<div>
+                <div class="bg-white/10 border border-white/20 rounded-3xl p-6 backdrop-blur">
 
-<label>Your Name</label>
+                    <div class="text-sm text-green-200 mb-4">
+                        LIVE COMMUNITY IMPACT
+                    </div>
 
-<input
-    id="reportName"
-    type="text"
-    placeholder="Enter your name"
->
+                    <div class="grid grid-cols-2 gap-4">
 
+                        <div class="bg-white/10 rounded-2xl p-5">
+                            <div class="text-3xl">🗑️</div>
+                            <div id="heroReports" class="text-3xl font-extrabold mt-3">
+                                0
+                            </div>
+                            <div class="text-green-200 text-sm">
+                                Waste Reports
+                            </div>
+                        </div>
 
-<label>Phone Number</label>
+                        <div class="bg-white/10 rounded-2xl p-5">
+                            <div class="text-3xl">🚚</div>
+                            <div id="heroPickups" class="text-3xl font-extrabold mt-3">
+                                0
+                            </div>
+                            <div class="text-green-200 text-sm">
+                                Pickup Requests
+                            </div>
+                        </div>
 
-<input
-    id="reportPhone"
-    type="text"
-    placeholder="Enter phone number"
->
+                        <div class="bg-white/10 rounded-2xl p-5">
+                            <div class="text-3xl">🌱</div>
+                            <div id="heroPoints" class="text-3xl font-extrabold mt-3">
+                                0
+                            </div>
+                            <div class="text-green-200 text-sm">
+                                Green Points
+                            </div>
+                        </div>
 
+                        <div class="bg-white/10 rounded-2xl p-5">
+                            <div class="text-3xl">♻️</div>
+                            <div id="heroResolved" class="text-3xl font-extrabold mt-3">
+                                0
+                            </div>
+                            <div class="text-green-200 text-sm">
+                                Resolved
+                            </div>
+                        </div>
 
-<label>Waste Issue</label>
+                    </div>
 
-<select id="reportIssue">
+                </div>
 
-<option value="">Select Issue</option>
+            </div>
 
-<option>Garbage on Road</option>
+        </div>
 
-<option>Overflowing Dustbin</option>
-
-<option>Plastic Waste</option>
-
-<option>Open Dumping</option>
-
-<option>Dirty Public Area</option>
-
-<option>Other</option>
-
-</select>
-
-</div>
-
-
-<div>
-
-<label>Location</label>
-
-<input
-    id="reportLocation"
-    type="text"
-    placeholder="Enter location"
->
-
-
-<label>Description</label>
-
-<textarea
-    id="reportDescription"
-    placeholder="Describe the problem..."
-></textarea>
-
-</div>
-
-</div>
-
-
-<button onclick="submitReport()">
-    📝 Submit Report
-</button>
-
-
-<div id="reportResult" class="result"></div>
-
-</div>
+    </div>
 
 </section>
 
 
+<!-- ========================================================= -->
+<!-- DASHBOARD -->
+<!-- ========================================================= -->
 
-<!-- ================================================= -->
-<!-- PICKUP REQUEST -->
-<!-- ================================================= -->
+<section id="dashboard" class="py-16">
 
-<section class="section" id="pickup">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-<div class="card">
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8">
 
-<h2>🚛 Waste Pickup Request</h2>
+            <div>
+                <span class="text-green-600 font-bold text-sm uppercase tracking-wider">
+                    Live Statistics
+                </span>
 
-<p>
-Request waste collection from your home, shop or society.
-</p>
+                <h2 class="section-title text-3xl font-extrabold mt-2">
+                    Community Impact Dashboard
+                </h2>
 
+                <p class="text-gray-600 mt-2">
+                    Real-time information from your GreenCare system.
+                </p>
+            </div>
 
-<div class="grid">
+            <button
+                onclick="loadDashboard()"
+                class="btn bg-green-700 hover:bg-green-800 text-white px-5 py-3 rounded-xl font-bold">
+                🔄 Refresh
+            </button>
 
-<div>
-
-<label>Name</label>
-
-<input
-    id="pickupName"
-    type="text"
-    placeholder="Your name"
->
-
-
-<label>Phone</label>
-
-<input
-    id="pickupPhone"
-    type="text"
-    placeholder="Phone number"
->
+        </div>
 
 
-<label>Waste Type</label>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-5">
 
-<select id="wasteType">
+            <div class="card stat-card p-5">
+                <div class="text-3xl">🗑️</div>
+                <div id="dashTotalReports" class="text-3xl font-extrabold text-gray-900 mt-3">0</div>
+                <div class="text-sm text-gray-500">Total Reports</div>
+            </div>
 
-<option value="">Select Waste Type</option>
+            <div class="card stat-card p-5">
+                <div class="text-3xl">📨</div>
+                <div id="dashSubmitted" class="text-3xl font-extrabold text-blue-600 mt-3">0</div>
+                <div class="text-sm text-gray-500">Submitted</div>
+            </div>
 
-<option>Wet Waste</option>
+            <div class="card stat-card p-5">
+                <div class="text-3xl">🔄</div>
+                <div id="dashInProgress" class="text-3xl font-extrabold text-yellow-600 mt-3">0</div>
+                <div class="text-sm text-gray-500">In Progress</div>
+            </div>
 
-<option>Dry Waste</option>
+            <div class="card stat-card p-5">
+                <div class="text-3xl">✅</div>
+                <div id="dashResolved" class="text-3xl font-extrabold text-green-600 mt-3">0</div>
+                <div class="text-sm text-gray-500">Resolved</div>
+            </div>
 
-<option>Plastic Waste</option>
+            <div class="card stat-card p-5">
+                <div class="text-3xl">🚚</div>
+                <div id="dashPickups" class="text-3xl font-extrabold text-purple-600 mt-3">0</div>
+                <div class="text-sm text-gray-500">Pickup Requests</div>
+            </div>
 
-<option>E-Waste</option>
+            <div class="card stat-card p-5">
+                <div class="text-3xl">🌱</div>
+                <div id="dashPoints" class="text-3xl font-extrabold text-emerald-600 mt-3">0</div>
+                <div class="text-sm text-gray-500">Green Points</div>
+            </div>
 
-<option>Mixed Waste</option>
+            <div class="card stat-card p-5">
+                <div class="text-3xl">🚨</div>
+                <div id="dashCritical" class="text-3xl font-extrabold text-red-600 mt-3">0</div>
+                <div class="text-sm text-gray-500">Critical Issues</div>
+            </div>
 
-</select>
+            <div class="card stat-card p-5">
+                <div class="text-3xl">⚠️</div>
+                <div id="dashHigh" class="text-3xl font-extrabold text-orange-600 mt-3">0</div>
+                <div class="text-sm text-gray-500">High Priority</div>
+            </div>
 
-</div>
-
-
-<div>
-
-<label>Pickup Address</label>
-
-<textarea
-    id="pickupAddress"
-    placeholder="Enter complete address"
-></textarea>
-
-
-<label>Pickup Date</label>
-
-<input
-    id="pickupDate"
-    type="date"
->
-
-
-<label>Additional Notes</label>
-
-<input
-    id="pickupNotes"
-    type="text"
-    placeholder="Optional"
->
-
-</div>
-
-</div>
-
-
-<button onclick="submitPickup()">
-    🚛 Request Waste Pickup
-</button>
+        </div>
 
 
-<div id="pickupResult" class="result"></div>
+        <div class="grid md:grid-cols-2 gap-6 mt-8">
 
-</div>
+            <div class="card p-6">
+
+                <h3 class="font-extrabold text-xl text-green-900">
+                    🌍 Environmental Progress
+                </h3>
+
+                <p class="text-sm text-gray-500 mt-2">
+                    Every report helps create a cleaner community.
+                </p>
+
+                <div class="mt-6 space-y-5">
+
+                    <div>
+                        <div class="flex justify-between text-sm mb-2">
+                            <span>Reports Resolved</span>
+                            <span id="resolvedPercent">0%</span>
+                        </div>
+
+                        <div class="progress-bar">
+                            <div
+                                id="resolvedProgress"
+                                class="progress-fill"
+                                style="width:0%">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between text-sm mb-2">
+                            <span>Community Participation</span>
+                            <span id="citizenCount">0 citizens</span>
+                        </div>
+
+                        <div class="progress-bar">
+                            <div
+                                id="citizenProgress"
+                                class="progress-fill"
+                                style="width:0%">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="card p-6">
+
+                <h3 class="font-extrabold text-xl text-green-900">
+                    🚨 Priority Overview
+                </h3>
+
+                <div class="grid grid-cols-2 gap-4 mt-6">
+
+                    <div class="bg-red-50 rounded-xl p-4">
+                        <div class="text-red-600 font-bold">
+                            Critical
+                        </div>
+                        <div id="priorityCritical" class="text-3xl font-extrabold mt-2">
+                            0
+                        </div>
+                    </div>
+
+                    <div class="bg-orange-50 rounded-xl p-4">
+                        <div class="text-orange-600 font-bold">
+                            High
+                        </div>
+                        <div id="priorityHigh" class="text-3xl font-extrabold mt-2">
+                            0
+                        </div>
+                    </div>
+
+                    <div class="bg-yellow-50 rounded-xl p-4">
+                        <div class="text-yellow-600 font-bold">
+                            Medium
+                        </div>
+                        <div id="priorityMedium" class="text-3xl font-extrabold mt-2">
+                            0
+                        </div>
+                    </div>
+
+                    <div class="bg-green-50 rounded-xl p-4">
+                        <div class="text-green-600 font-bold">
+                            Normal
+                        </div>
+                        <div id="priorityNormal" class="text-3xl font-extrabold mt-2">
+                            0
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
 
 </section>
 
 
+<!-- ========================================================= -->
+<!-- REPORT WASTE -->
+<!-- ========================================================= -->
 
-<!-- ================================================= -->
+<section id="report" class="py-16 bg-white">
+
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <div class="text-center mb-10">
+
+            <span class="text-green-600 font-bold text-sm uppercase tracking-wider">
+                Citizen Reporting
+            </span>
+
+            <h2 class="section-title text-3xl font-extrabold mt-2">
+                Report a Waste Problem
+            </h2>
+
+            <p class="text-gray-600 mt-2">
+                Upload a photo and tell us what is happening.
+            </p>
+
+        </div>
+
+
+        <form
+            id="reportForm"
+            class="card p-6 md:p-8">
+
+            <div class="grid md:grid-cols-2 gap-5">
+
+                <div>
+                    <label class="block text-sm font-bold mb-2">
+                        Your Name
+                    </label>
+
+                    <input
+                        id="reportName"
+                        name="name"
+                        type="text"
+                        class="input"
+                        placeholder="Enter your name"
+                        required>
+                </div>
+
+
+                <div>
+                    <label class="block text-sm font-bold mb-2">
+                        Phone Number
+                    </label>
+
+                    <input
+                        id="reportPhone"
+                        name="phone"
+                        type="tel"
+                        class="input"
+                        placeholder="Enter phone number">
+                </div>
+
+
+                <div>
+                    <label class="block text-sm font-bold mb-2">
+                        Waste Issue
+                    </label>
+
+                    <select
+                        id="reportIssue"
+                        name="issue"
+                        class="input"
+                        required>
+
+                        <option value="">Select issue</option>
+                        <option value="Overflowing Garbage Bin">Overflowing Garbage Bin</option>
+                        <option value="Missed Collection">Missed Collection</option>
+                        <option value="Illegal Dumping">Illegal Dumping</option>
+                        <option value="Open Garbage">Open Garbage</option>
+                        <option value="Plastic Waste">Plastic Waste</option>
+                        <option value="Wet Waste">Wet Waste</option>
+                        <option value="Dry Waste">Dry Waste</option>
+                        <option value="Other">Other</option>
+
+                    </select>
+                </div>
+
+
+                <div>
+                    <label class="block text-sm font-bold mb-2">
+                        Location
+                    </label>
+
+                    <input
+                        id="reportLocation"
+                        name="location"
+                        type="text"
+                        class="input"
+                        placeholder="Area / street / landmark"
+                        required>
+                </div>
+
+
+                <div>
+                    <label class="block text-sm font-bold mb-2">
+                        Priority
+                    </label>
+
+                    <select
+                        id="reportPriority"
+                        name="priority"
+                        class="input">
+
+                        <option value="Normal">🟢 Normal</option>
+                        <option value="Medium">🟡 Medium</option>
+                        <option value="High">🟠 High</option>
+                        <option value="Critical">🔴 Critical</option>
+
+                    </select>
+                </div>
+
+
+                <div>
+                    <label class="block text-sm font-bold mb-2">
+                        Waste Photo
+                    </label>
+
+                    <input
+                        id="reportPhoto"
+                        name="photo"
+                        type="file"
+                        accept="image/png,image/jpeg,image/jpg,image/webp"
+                        class="input">
+
+                    <p class="text-xs text-gray-500 mt-2">
+                        PNG, JPG, JPEG or WEBP • Maximum 10 MB
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="mt-5">
+
+                <label class="block text-sm font-bold mb-2">
+                    Description
+                </label>
+
+                <textarea
+                    id="reportDescription"
+                    name="description"
+                    class="input"
+                    rows="5"
+                    placeholder="Describe the waste problem..."
+                    required></textarea>
+
+            </div>
+
+
+            <div id="photoPreviewBox" class="hidden mt-5">
+
+                <div class="text-sm font-bold mb-2">
+                    Photo Preview
+                </div>
+
+                <img
+                    id="photoPreview"
+                    class="preview-image border"
+                    alt="Waste photo preview">
+
+            </div>
+
+
+            <div class="mt-7 flex flex-wrap gap-3">
+
+                <button
+                    type="submit"
+                    id="reportSubmitBtn"
+                    class="btn bg-green-700 hover:bg-green-800 text-white font-bold px-7 py-3 rounded-xl">
+                    🚀 Submit Report
+                </button>
+
+                <button
+                    type="reset"
+                    class="btn border border-gray-300 px-7 py-3 rounded-xl font-bold">
+                    Clear
+                </button>
+
+            </div>
+
+
+            <div
+                id="reportResult"
+                class="hidden mt-6 rounded-xl p-4">
+            </div>
+
+        </form>
+
+    </div>
+
+</section>
+
+
+<!-- ========================================================= -->
+<!-- PICKUP -->
+<!-- ========================================================= -->
+
+<section id="pickup" class="py-16">
+
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <div class="grid md:grid-cols-2 gap-8">
+
+            <div>
+
+                <span class="text-green-600 font-bold text-sm uppercase tracking-wider">
+                    Doorstep Collection
+                </span>
+
+                <h2 class="section-title text-3xl font-extrabold mt-2">
+                    Request Waste Pickup
+                </h2>
+
+                <p class="text-gray-600 mt-3 leading-7">
+                    Request collection of recyclable, dry or wet waste from your location.
+                    Pickup requests also help you earn Green Points.
+                </p>
+
+                <div class="mt-6 space-y-3">
+
+                    <div class="flex gap-3">
+                        <span>♻️</span>
+                        <span>Responsible waste disposal</span>
+                    </div>
+
+                    <div class="flex gap-3">
+                        <span>🚚</span>
+                        <span>Convenient pickup request</span>
+                    </div>
+
+                    <div class="flex gap-3">
+                        <span>🌱</span>
+                        <span>Earn 30 Green Points</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <form id="pickupForm" class="card p-6">
+
+                <div class="space-y-4">
+
+                    <div>
+                        <label class="block text-sm font-bold mb-2">
+                            Name
+                        </label>
+
+                        <input
+                            id="pickupName"
+                            name="name"
+                            class="input"
+                            placeholder="Your name"
+                            required>
+                    </div>
+
+
+                    <div>
+                        <label class="block text-sm font-bold mb-2">
+                            Phone
+                        </label>
+
+                        <input
+                            id="pickupPhone"
+                            name="phone"
+                            type="tel"
+                            class="input"
+                            placeholder="Phone number"
+                            required>
+                    </div>
+
+
+                    <div>
+                        <label class="block text-sm font-bold mb-2">
+                            Waste Type
+                        </label>
+
+                        <select
+                            id="pickupWasteType"
+                            name="waste_type"
+                            class="input"
+                            required>
+
+                            <option value="">Select waste type</option>
+                            <option value="Dry Waste">Dry Waste</option>
+                            <option value="Wet Waste">Wet Waste</option>
+                            <option value="Recyclable Waste">Recyclable Waste</option>
+                            <option value="E-Waste">E-Waste</option>
+                            <option value="Mixed Waste">Mixed Waste</option>
+
+                        </select>
+                    </div>
+
+
+                    <div>
+                        <label class="block text-sm font-bold mb-2">
+                            Pickup Location
+                        </label>
+
+                        <input
+                            id="pickupLocation"
+                            name="location"
+                            class="input"
+                            placeholder="Address / landmark"
+                            required>
+                    </div>
+
+
+                    <div>
+                        <label class="block text-sm font-bold mb-2">
+                            Preferred Date
+                        </label>
+
+                        <input
+                            id="pickupDate"
+                            name="date"
+                            type="date"
+                            class="input"
+                            required>
+                    </div>
+
+
+                    <div>
+                        <label class="block text-sm font-bold mb-2">
+                            Preferred Time
+                        </label>
+
+                        <select
+                            id="pickupTime"
+                            name="time"
+                            class="input">
+
+                            <option value="Morning">Morning</option>
+                            <option value="Afternoon">Afternoon</option>
+                            <option value="Evening">Evening</option>
+
+                        </select>
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="btn w-full bg-green-700 hover:bg-green-800 text-white font-bold py-3 rounded-xl">
+                        🚚 Request Pickup
+                    </button>
+
+                    <div
+                        id="pickupResult"
+                        class="hidden rounded-xl p-4">
+                    </div>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ========================================================= -->
 <!-- TRACK COMPLAINT -->
-<!-- ================================================= -->
+<!-- ========================================================= -->
 
-<section class="section" id="track">
+<section id="track" class="py-16 bg-white">
 
-<div class="card">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
 
-<h2>🔍 Track Complaint</h2>
+        <div class="text-center mb-10">
 
-<p>
-Enter the complaint number received after reporting.
-</p>
+            <span class="text-green-600 font-bold text-sm uppercase tracking-wider">
+                Complaint Tracking
+            </span>
 
+            <h2 class="section-title text-3xl font-extrabold mt-2">
+                Track Your Complaint
+            </h2>
 
-<label>Complaint Number</label>
+            <p class="text-gray-600 mt-2">
+                Enter your complaint number to see the latest status.
+            </p>
 
-<input
-    id="complaintNumber"
-    type="text"
-    placeholder="Example: WC-20260930-1234"
->
-
-
-<button onclick="trackComplaint()">
-    🔍 Track Complaint
-</button>
+        </div>
 
 
-<div id="trackResult" class="result"></div>
+        <div class="card p-6 max-w-2xl mx-auto">
 
-</div>
+            <form id="trackForm" class="flex flex-col sm:flex-row gap-3">
+
+                <input
+                    id="trackNumber"
+                    class="input"
+                    placeholder="Example: GC-20261001-1234"
+                    required>
+
+                <button
+                    type="submit"
+                    class="btn bg-green-700 hover:bg-green-800 text-white font-bold px-7 py-3 rounded-xl whitespace-nowrap">
+                    🔎 Track
+                </button>
+
+            </form>
+
+
+            <div
+                id="trackResult"
+                class="hidden mt-6">
+            </div>
+
+        </div>
+
+    </div>
 
 </section>
 
 
+<!-- ========================================================= -->
+<!-- REWARDS -->
+<!-- ========================================================= -->
 
-<!-- ================================================= -->
+<section id="rewards" class="py-16">
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <div class="text-center mb-10">
+
+            <span class="text-green-600 font-bold text-sm uppercase tracking-wider">
+                Gamified Sustainability
+            </span>
+
+            <h2 class="section-title text-3xl font-extrabold mt-2">
+                Green Points & Rewards
+            </h2>
+
+            <p class="text-gray-600 mt-2">
+                Make sustainable actions a habit and earn Green Points.
+            </p>
+
+        </div>
+
+
+        <div class="grid md:grid-cols-3 gap-6">
+
+            <div class="card p-6 text-center">
+
+                <div class="text-5xl">🌱</div>
+
+                <h3 class="font-extrabold text-xl mt-4">
+                    Report Waste
+                </h3>
+
+                <div class="text-green-600 text-3xl font-extrabold mt-3">
+                    +10
+                </div>
+
+                <p class="text-sm text-gray-500 mt-2">
+                    Points per valid report
+                </p>
+
+            </div>
+
+
+            <div class="card p-6 text-center">
+
+                <div class="text-5xl">🚚</div>
+
+                <h3 class="font-extrabold text-xl mt-4">
+                    Request Pickup
+                </h3>
+
+                <div class="text-green-600 text-3xl font-extrabold mt-3">
+                    +30
+                </div>
+
+                <p class="text-sm text-gray-500 mt-2">
+                    Points for responsible collection
+                </p>
+
+            </div>
+
+
+            <div class="card p-6 text-center">
+
+                <div class="text-5xl">✅</div>
+
+                <h3 class="font-extrabold text-xl mt-4">
+                    Resolution
+                </h3>
+
+                <div class="text-green-600 text-3xl font-extrabold mt-3">
+                    +15
+                </div>
+
+                <p class="text-sm text-gray-500 mt-2">
+                    Bonus when your issue is resolved
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="grid lg:grid-cols-2 gap-8 mt-8">
+
+            <div class="card p-6">
+
+                <div class="flex items-center justify-between mb-6">
+
+                    <div>
+                        <h3 class="text-xl font-extrabold text-green-900">
+                            🌿 My Green Profile
+                        </h3>
+
+                        <p class="text-sm text-gray-500 mt-1">
+                            Track your sustainability contribution.
+                        </p>
+                    </div>
+
+                    <div class="text-4xl">
+                        🌱
+                    </div>
+
+                </div>
+
+
+                <div class="bg-green-50 rounded-2xl p-6">
+
+                    <div class="text-sm text-green-700 font-bold">
+                        CURRENT POINTS
+                    </div>
+
+                    <div
+                        id="myPoints"
+                        class="text-5xl font-extrabold text-green-800 mt-2">
+                        0
+                    </div>
+
+                    <div
+                        id="myLevel"
+                        class="mt-3 font-bold text-green-700">
+                        🌱 Green Beginner
+                    </div>
+
+                </div>
+
+
+                <div class="mt-5">
+
+                    <div class="flex justify-between text-sm mb-2">
+
+                        <span>
+                            Progress to next level
+                        </span>
+
+                        <span id="levelProgressText">
+                            0%
+                        </span>
+
+                    </div>
+
+                    <div class="progress-bar">
+
+                        <div
+                            id="levelProgress"
+                            class="progress-fill"
+                            style="width:0%">
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="card p-6">
+
+                <h3 class="text-xl font-extrabold text-green-900 mb-5">
+                    🏆 Community Leaderboard
+                </h3>
+
+                <div
+                    id="leaderboard"
+                    class="space-y-3">
+
+                    <div class="text-gray-500 text-sm">
+                        Loading leaderboard...
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ========================================================= -->
 <!-- AI ASSISTANT -->
-<!-- ================================================= -->
+<!-- ========================================================= -->
 
-<section class="section" id="ai">
+<section id="ai" class="py-16 bg-white">
 
-<div class="card">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
-<h2>🤖 AI Waste Assistant</h2>
+        <div class="grid lg:grid-cols-2 gap-8 items-start">
 
-<p>
-Describe a waste-related problem and get a practical AI-generated solution.
-</p>
+            <div>
 
+                <span class="text-green-600 font-bold text-sm uppercase tracking-wider">
+                    Smart AI Support
+                </span>
 
-<label>Describe the Problem</label>
+                <h2 class="section-title text-3xl font-extrabold mt-2">
+                    AI Waste Problem Solver
+                </h2>
 
-<textarea
-    id="problem"
-    style="min-height:180px;"
-    placeholder="Example: My city has too much plastic waste."
-></textarea>
-
-
-<button id="solveButton" onclick="findSolution()">
-    💡 Get AI Solution
-</button>
+                <p class="text-gray-600 mt-4 leading-7">
+                    Describe a waste-management problem and GreenCare AI can
+                    analyze it and suggest practical actions.
+                </p>
 
 
-<div id="result" class="result"></div>
+                <div class="mt-7 space-y-4">
 
-</div>
+                    <div class="flex gap-4">
 
-</section>
+                        <div class="w-10 h-10 rounded-xl bg-green-100 flex items-center justify-center">
+                            🤖
+                        </div>
 
+                        <div>
+                            <div class="font-bold">
+                                AI Analysis
+                            </div>
 
+                            <div class="text-sm text-gray-500">
+                                Understand the problem and identify possible causes.
+                            </div>
+                        </div>
 
-<!-- ================================================= -->
-<!-- AWARENESS -->
-<!-- ================================================= -->
-
-<section class="section" id="awareness">
-
-<div class="card awareness">
-
-<h2>🌸 Waste Awareness Garden</h2>
-
-<p>
-Small habits grow into a cleaner community.
-</p>
+                    </div>
 
 
-<div class="awareness-grid">
+                    <div class="flex gap-4">
+
+                        <div class="w-10 h-10 rounded-xl bg-green-100 flex items-center justify-center">
+                            💡
+                        </div>
+
+                        <div>
+                            <div class="font-bold">
+                                Smart Suggestions
+                            </div>
+
+                            <div class="text-sm text-gray-500">
+                                Get actionable ideas for citizens and administrators.
+                            </div>
+                        </div>
+
+                    </div>
 
 
-<div class="awareness-box">
+                    <div class="flex gap-4">
 
-<div class="icon">🟢</div>
+                        <div class="w-10 h-10 rounded-xl bg-green-100 flex items-center justify-center">
+                            🌍
+                        </div>
 
-<h3>Wet Waste</h3>
+                        <div>
+                            <div class="font-bold">
+                                Sustainability Focus
+                            </div>
 
-<p>
-Put food waste, vegetable peels and other organic waste
-into the green bin.
-</p>
+                            <div class="text-sm text-gray-500">
+                                Encourage better segregation and responsible disposal.
+                            </div>
+                        </div>
 
-</div>
+                    </div>
 
+                </div>
 
-<div class="awareness-box">
-
-<div class="icon">🔵</div>
-
-<h3>Dry Waste</h3>
-
-<p>
-Keep paper, cardboard, plastic bottles and recyclable
-materials separately.
-</p>
-
-</div>
+            </div>
 
 
-<div class="awareness-box">
+            <div class="card p-6">
 
-<div class="icon">🟤</div>
+                <label class="block text-sm font-bold mb-2">
+                    Describe your waste problem
+                </label>
 
-<h3>Composting</h3>
-
-<p>
-Turn kitchen and garden waste into useful compost
-instead of sending it to landfill.
-</p>
-
-</div>
-
-
-<div class="awareness-box">
-
-<div class="icon">♻️</div>
-
-<h3>Recycle</h3>
-
-<p>
-Reuse materials whenever possible and send recyclable
-waste to proper recycling facilities.
-</p>
-
-</div>
+                <textarea
+                    id="aiProblem"
+                    class="input"
+                    rows="7"
+                    placeholder="Example: The garbage bins near our college are overflowing every evening and waste is scattered around the road."></textarea>
 
 
-<div class="awareness-box">
+                <div class="grid sm:grid-cols-2 gap-3 mt-4">
 
-<div class="icon">🌱</div>
+                    <select
+                        id="aiDomain"
+                        class="input">
 
-<h3>Reduce Plastic</h3>
+                        <option value="">Auto Detect Domain</option>
+                        <option value="Waste Management">Waste Management</option>
+                        <option value="Environment">Environment</option>
+                        <option value="Public Health">Public Health</option>
+                        <option value="Education">Education</option>
+                        <option value="Smart City">Smart City</option>
 
-<p>
-Use reusable bags, bottles and containers instead of
-single-use plastic.
-</p>
-
-</div>
-
-
-<div class="awareness-box">
-
-<div class="icon">🌍</div>
-
-<h3>Keep Earth Clean</h3>
-
-<p>
-Never throw garbage on roads, drains, parks or public
-places.
-</p>
-
-</div>
+                    </select>
 
 
-</div>
+                    <button
+                        id="aiAnalyzeBtn"
+                        onclick="analyzeWithAI()"
+                        class="btn bg-green-700 hover:bg-green-800 text-white font-bold rounded-xl">
+                        🤖 Analyze Problem
+                    </button>
 
-</div>
+                </div>
+
+
+                <div
+                    id="aiResult"
+                    class="hidden mt-6">
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
 
 </section>
 
 
+<!-- ========================================================= -->
+<!-- ADMIN -->
+<!-- ========================================================= -->
 
-<!-- ================================================= -->
-<!-- HOW GREENCARE WORKS - FLOWCHART -->
-<!-- ================================================= -->
+<section id="admin" class="py-16">
 
-<section class="section" id="flowchart">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-<div class="card flowchart">
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8">
 
-<h2>🔄 How GreenCare Works</h2>
+            <div>
 
-<p>
-Simple steps to solve waste problems.
-</p>
+                <span class="text-green-600 font-bold text-sm uppercase tracking-wider">
+                    Management Panel
+                </span>
 
+                <h2 class="section-title text-3xl font-extrabold mt-2">
+                    Demo Admin Dashboard
+                </h2>
 
-<div class="flow-step">
+                <p class="text-gray-600 mt-2">
+                    View and manage reported waste issues.
+                </p>
 
-<h3>👤 1. User</h3>
+            </div>
 
-<p>
-User waste problem identify karta hai.
-</p>
+            <button
+                onclick="loadAdminData()"
+                class="btn bg-green-700 hover:bg-green-800 text-white px-5 py-3 rounded-xl font-bold">
+                🔄 Refresh Reports
+            </button>
 
-</div>
-
-
-<div class="flow-arrow">
-⬇️
-</div>
-
-
-<div class="flow-step">
-
-<h3>📝 2. Report Waste</h3>
-
-<p>
-User waste problem report karta hai.
-</p>
-
-</div>
+        </div>
 
 
-<div class="flow-arrow">
-⬇️
-</div>
+        <div class="card overflow-hidden">
+
+            <div class="overflow-x-auto">
+
+                <table class="w-full text-sm">
+
+                    <thead class="bg-green-50">
+
+                        <tr>
+
+                            <th class="text-left p-4 font-bold">
+                                Complaint
+                            </th>
+
+                            <th class="text-left p-4 font-bold">
+                                Citizen
+                            </th>
+
+                            <th class="text-left p-4 font-bold">
+                                Issue
+                            </th>
+
+                            <th class="text-left p-4 font-bold">
+                                Priority
+                            </th>
+
+                            <th class="text-left p-4 font-bold">
+                                Status
+                            </th>
+
+                            <th class="text-left p-4 font-bold">
+                                Action
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="adminTableBody">
+
+                        <tr>
+                            <td
+                                colspan="6"
+                                class="p-8 text-center text-gray-500">
+                                Loading reports...
+                            </td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
 
 
-<div class="flow-step">
+        <div
+            id="adminMessage"
+            class="mt-4 text-sm">
+        </div>
 
-<h3>🔎 3. Track Complaint</h3>
-
-<p>
-User complaint ka status check karta hai.
-</p>
-
-</div>
-
-
-<div class="flow-arrow">
-⬇️
-</div>
-
-
-<div class="flow-step">
-
-<h3>👨‍💼 4. Admin Checks</h3>
-
-<p>
-Admin complaint ko check karta hai.
-</p>
-
-</div>
-
-
-<div class="flow-arrow">
-⬇️
-</div>
-
-
-<div class="flow-step">
-
-<h3>🚛 5. Waste Collection</h3>
-
-<p>
-Waste collection ka process start hota hai.
-</p>
-
-</div>
-
-
-<div class="flow-arrow">
-⬇️
-</div>
-
-
-<div class="flow-step">
-
-<h3>✅ 6. Problem Resolved</h3>
-
-<p>
-Complaint ka status Resolved ho jata hai.
-</p>
-
-</div>
-
-
-<div class="flow-arrow">
-⬇️
-</div>
-
-
-<div class="flow-step">
-
-<h3>🌱 7. Green Points</h3>
-
-<p>
-User ko participation ke liye Green Points milte hain.
-</p>
-
-</div>
-
-
-</div>
+    </div>
 
 </section>
 
 
-</div>
+<!-- ========================================================= -->
+<!-- HOW IT WORKS -->
+<!-- ========================================================= -->
+
+<section class="py-16 bg-white">
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <div class="text-center mb-10">
+
+            <span class="text-green-600 font-bold text-sm uppercase tracking-wider">
+                Simple Process
+            </span>
+
+            <h2 class="section-title text-3xl font-extrabold mt-2">
+                How GreenCare Works
+            </h2>
+
+        </div>
 
 
+        <div class="grid md:grid-cols-4 gap-6">
 
-<!-- ================= FOOTER ================= -->
+            <div class="text-center">
 
-<footer>
+                <div class="w-16 h-16 mx-auto rounded-2xl bg-green-100 flex items-center justify-center text-3xl">
+                    📷
+                </div>
 
-🌿 GreenCare Waste Management
+                <h3 class="font-extrabold mt-4">
+                    1. Report
+                </h3>
 
-<br><br>
+                <p class="text-sm text-gray-500 mt-2">
+                    Report a waste issue with location and photo.
+                </p>
 
-Together for a Cleaner, Greener Future 🌍
+            </div>
+
+
+            <div class="text-center">
+
+                <div class="w-16 h-16 mx-auto rounded-2xl bg-green-100 flex items-center justify-center text-3xl">
+                    🚨
+                </div>
+
+                <h3 class="font-extrabold mt-4">
+                    2. Prioritize
+                </h3>
+
+                <p class="text-sm text-gray-500 mt-2">
+                    Critical issues can be identified quickly.
+                </p>
+
+            </div>
+
+
+            <div class="text-center">
+
+                <div class="w-16 h-16 mx-auto rounded-2xl bg-green-100 flex items-center justify-center text-3xl">
+                    🚚
+                </div>
+
+                <h3 class="font-extrabold mt-4">
+                    3. Resolve
+                </h3>
+
+                <p class="text-sm text-gray-500 mt-2">
+                    Collection teams can manage the complaint.
+                </p>
+
+            </div>
+
+
+            <div class="text-center">
+
+                <div class="w-16 h-16 mx-auto rounded-2xl bg-green-100 flex items-center justify-center text-3xl">
+                    🌱
+                </div>
+
+                <h3 class="font-extrabold mt-4">
+                    4. Reward
+                </h3>
+
+                <p class="text-sm text-gray-500 mt-2">
+                    Citizens earn Green Points for participation.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ========================================================= -->
+<!-- FOOTER -->
+<!-- ========================================================= -->
+
+<footer class="bg-green-950 text-green-100">
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+
+        <div class="grid md:grid-cols-3 gap-8">
+
+            <div>
+
+                <div class="flex items-center gap-3">
+
+                    <div class="w-10 h-10 rounded-xl bg-green-700 flex items-center justify-center text-xl">
+                        🌿
+                    </div>
+
+                    <div>
+                        <div class="font-extrabold text-lg">
+                            GreenCare
+                        </div>
+
+                        <div class="text-xs text-green-300">
+                            Smart Waste Management
+                        </div>
+                    </div>
+
+                </div>
+
+                <p class="text-sm text-green-300 mt-4 leading-6">
+                    Technology-powered waste management for cleaner,
+                    healthier and greener communities.
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <h3 class="font-bold text-white">
+                    Quick Links
+                </h3>
+
+                <div class="flex flex-col gap-2 mt-4 text-sm">
+
+                    <a href="#dashboard" class="hover:text-white">
+                        Dashboard
+                    </a>
+
+                    <a href="#report" class="hover:text-white">
+                        Report Waste
+                    </a>
+
+                    <a href="#pickup" class="hover:text-white">
+                        Pickup
+                    </a>
+
+                    <a href="#rewards" class="hover:text-white">
+                        Rewards
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <div>
+
+                <h3 class="font-bold text-white">
+                    GreenCare Mission
+                </h3>
+
+                <p class="text-sm text-green-300 mt-4 leading-6">
+                    Empower citizens to report waste problems,
+                    improve collection and build sustainable communities.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="border-t border-green-800 mt-8 pt-6 text-center text-sm text-green-400">
+
+            © 2026 GreenCare • Smart Waste Management System
+
+        </div>
+
+    </div>
 
 </footer>
 
 
+<!-- ========================================================= -->
+<!-- TOAST -->
+<!-- ========================================================= -->
+
+<div id="toast" class="toast"></div>
+
+
+<!-- ========================================================= -->
+<!-- JAVASCRIPT -->
+<!-- ========================================================= -->
 
 <script>
 
-/* =====================================================
-   REPORT WASTE ISSUE
-===================================================== */
-
-async function submitReport() {
-
-    const result = document.getElementById("reportResult");
-
-    const data = {
-
-        name:
-            document.getElementById("reportName").value.trim(),
-
-        phone:
-            document.getElementById("reportPhone").value.trim(),
-
-        issue:
-            document.getElementById("reportIssue").value,
-
-        description:
-            document.getElementById("reportDescription").value.trim(),
-
-        location:
-            document.getElementById("reportLocation").value.trim()
-
-    };
+let currentPoints = 0;
 
 
-    if (!data.name || !data.phone || !data.issue || !data.location) {
+/* =========================================================
+   BASIC HELPERS
+========================================================= */
 
-        alert("Please fill Name, Phone, Issue and Location.");
+function escapeHtml(value) {
+
+    if (value === null || value === undefined) {
+        return "";
+    }
+
+    return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
+
+function showToast(message, type = "info") {
+
+    const toast = document.getElementById("toast");
+
+    toast.textContent = message;
+
+    toast.className = "toast " + type + " show";
+
+    setTimeout(() => {
+        toast.classList.remove("show");
+    }, 3500);
+}
+
+
+function setResult(elementId, message, type = "success") {
+
+    const element = document.getElementById(elementId);
+
+    if (!element) return;
+
+    element.className =
+        "mt-6 rounded-xl p-4 " +
+        (type === "success"
+            ? "bg-green-50 text-green-800 border border-green-200"
+            : "bg-red-50 text-red-800 border border-red-200");
+
+    element.innerHTML = message;
+
+    element.classList.remove("hidden");
+}
+
+
+/* =========================================================
+   MOBILE MENU
+========================================================= */
+
+document.getElementById("mobileMenuBtn").addEventListener("click", function () {
+
+    document.getElementById("mobileMenu").classList.toggle("show");
+
+});
+
+
+document.querySelectorAll("#mobileMenu a").forEach(link => {
+
+    link.addEventListener("click", () => {
+
+        document.getElementById("mobileMenu").classList.remove("show");
+
+    });
+
+});
+
+
+/* =========================================================
+   PHOTO PREVIEW
+========================================================= */
+
+document.getElementById("reportPhoto").addEventListener("change", function (event) {
+
+    const file = event.target.files[0];
+
+    const previewBox = document.getElementById("photoPreviewBox");
+    const preview = document.getElementById("photoPreview");
+
+    if (!file) {
+
+        previewBox.classList.add("hidden");
 
         return;
     }
 
+    if (file.size > 10 * 1024 * 1024) {
 
-    result.style.display = "block";
+        showToast("Photo must be smaller than 10 MB.", "error");
 
-    result.innerHTML = "⏳ Submitting report...";
+        event.target.value = "";
+
+        previewBox.classList.add("hidden");
+
+        return;
+    }
+
+    const reader = new FileReader();
+
+    reader.onload = function (e) {
+
+        preview.src = e.target.result;
+
+        previewBox.classList.remove("hidden");
+
+    };
+
+    reader.readAsDataURL(file);
+
+});
+
+
+/* =========================================================
+   DASHBOARD
+========================================================= */
+
+async function loadDashboard() {
+
+    try {
+
+        const response = await fetch("/dashboard");
+
+        const data = await response.json();
+
+        if (!response.ok || data.success === false) {
+
+            throw new Error(data.error || "Dashboard loading failed.");
+
+        }
+
+        const totalReports =
+            Number(data.total_reports || data.total_complaints || 0);
+
+        const submitted =
+            Number(data.submitted || 0);
+
+        const inProgress =
+            Number(data.in_progress || 0);
+
+        const resolved =
+            Number(data.resolved || 0);
+
+        const pickups =
+            Number(data.pickups || data.total_pickups || 0);
+
+        const points =
+            Number(data.points || data.green_points || 0);
+
+        const critical =
+            Number(data.critical || 0);
+
+        const high =
+            Number(data.high || 0);
+
+        const medium =
+            Number(data.medium || 0);
+
+        const normal =
+            Number(data.normal || 0);
+
+        const citizens =
+            Number(data.citizens || data.total_citizens || 0);
+
+
+        setText("dashTotalReports", totalReports);
+        setText("dashSubmitted", submitted);
+        setText("dashInProgress", inProgress);
+        setText("dashResolved", resolved);
+        setText("dashPickups", pickups);
+        setText("dashPoints", points);
+        setText("dashCritical", critical);
+        setText("dashHigh", high);
+
+        setText("priorityCritical", critical);
+        setText("priorityHigh", high);
+        setText("priorityMedium", medium);
+        setText("priorityNormal", normal);
+
+        setText("heroReports", totalReports);
+        setText("heroPickups", pickups);
+        setText("heroPoints", points);
+        setText("heroResolved", resolved);
+
+        const resolvedPercent =
+            totalReports > 0
+                ? Math.round((resolved / totalReports) * 100)
+                : 0;
+
+        setText("resolvedPercent", resolvedPercent + "%");
+
+        document.getElementById("resolvedProgress").style.width =
+            resolvedPercent + "%";
+
+
+        setText("citizenCount", citizens + " citizens");
+
+        const citizenPercent =
+            Math.min(citizens * 10, 100);
+
+        document.getElementById("citizenProgress").style.width =
+            citizenPercent + "%";
+
+
+        currentPoints = points;
+
+        updatePointsUI(points);
+
+    } catch (error) {
+
+        console.error(error);
+
+        showToast(
+            "Dashboard data load nahi ho paaya. Backend check karein.",
+            "error"
+        );
+
+    }
+
+}
+
+
+function setText(id, value) {
+
+    const element = document.getElementById(id);
+
+    if (element) {
+        element.textContent = value;
+    }
+
+}
+
+
+/* =========================================================
+   REPORT FORM
+========================================================= */
+
+document.getElementById("reportForm").addEventListener("submit", async function (event) {
+
+    event.preventDefault();
+
+    const form = this;
+
+    const button = document.getElementById("reportSubmitBtn");
+
+    button.disabled = true;
+
+    button.textContent = "⏳ Submitting...";
+
+    form.classList.add("loading");
 
 
     try {
+
+        const formData = new FormData(form);
+
 
         const response = await fetch("/report", {
 
             method: "POST",
 
-            headers: {
-                "Content-Type": "application/json"
-            },
-
-            body: JSON.stringify(data)
+            body: formData
 
         });
 
 
-        const responseData = await response.json();
+        const data = await response.json();
 
 
-        if (!response.ok) {
+        if (!response.ok || data.success === false) {
 
-            result.innerHTML = `
+            throw new Error(
+                data.error || "Report submit nahi ho paaya."
+            );
 
-                <div class="error">
-
-                    ❌ ${escapeHtml(
-                        responseData.error || "Report submission failed"
-                    )}
-
-                </div>
-
-            `;
-
-            return;
         }
 
 
-        result.innerHTML = `
-
-            <div class="success">
-
-                ✅ Waste issue reported successfully!
-
-                <br><br>
-
-                Your Complaint Number:
-
-                <br>
-
-                <strong style="font-size:22px;">
-
-                    ${escapeHtml(responseData.complaint_number)}
-
-                </strong>
-
-                <br><br>
-
-                Please save this number for tracking.
-
-            </div>
-
-        `;
+        const complaint =
+            data.complaint ||
+            data.report ||
+            data.data ||
+            data;
 
 
-        document.getElementById("complaintNumber").value =
-            responseData.complaint_number;
+        const complaintNumber =
+            complaint.complaint_number ||
+            data.complaint_number ||
+            data.number ||
+            "Generated";
+
+
+        const points =
+            data.points_earned ||
+            data.green_points ||
+            10;
+
+
+        setResult(
+            "reportResult",
+
+            `
+                <div class="font-extrabold text-lg">
+                    ✅ Report Submitted Successfully
+                </div>
+
+                <div class="mt-2">
+                    Complaint Number:
+                    <strong>${escapeHtml(complaintNumber)}</strong>
+                </div>
+
+                <div class="mt-1">
+                    🌱 You earned <strong>${points} Green Points</strong>.
+                </div>
+
+                <div class="mt-3">
+                    <a
+                        href="#track"
+                        class="font-bold underline">
+                        Track this complaint →
+                    </a>
+                </div>
+            `,
+
+            "success"
+        );
+
+
+        showToast(
+            "Waste report successfully submitted!",
+            "success"
+        );
+
+
+        form.reset();
+
+        document
+            .getElementById("photoPreviewBox")
+            .classList.add("hidden");
+
+
+        await loadDashboard();
+
+        await loadLeaderboard();
+
+        await loadAdminData();
+
+
+    } catch (error) {
+
+        console.error(error);
+
+        setResult(
+            "reportResult",
+            "❌ " + escapeHtml(error.message),
+            "error"
+        );
+
+        showToast(error.message, "error");
+
+    } finally {
+
+        button.disabled = false;
+
+        button.textContent = "🚀 Submit Report";
+
+        form.classList.remove("loading");
 
     }
 
-    catch (error) {
-
-        result.innerHTML = `
-
-            <div class="error">
-
-                ❌ Server connection error.
-
-            </div>
-
-        `;
-
-    }
-
-}
+});
 
 
+/* =========================================================
+   PICKUP FORM
+========================================================= */
 
-/* =====================================================
-   PICKUP REQUEST
-===================================================== */
+document.getElementById("pickupForm").addEventListener("submit", async function (event) {
 
-async function submitPickup() {
+    event.preventDefault();
 
-    const result =
-        document.getElementById("pickupResult");
+    const form = this;
 
+    const button = form.querySelector("button[type='submit']");
 
-    const data = {
+    button.disabled = true;
 
-        name:
-            document.getElementById("pickupName").value.trim(),
-
-        phone:
-            document.getElementById("pickupPhone").value.trim(),
-
-        address:
-            document.getElementById("pickupAddress").value.trim(),
-
-        waste_type:
-            document.getElementById("wasteType").value,
-
-        pickup_date:
-            document.getElementById("pickupDate").value,
-
-        notes:
-            document.getElementById("pickupNotes").value.trim()
-
-    };
-
-
-    if (
-        !data.name ||
-        !data.phone ||
-        !data.address ||
-        !data.waste_type ||
-        !data.pickup_date
-    ) {
-
-        alert("Please fill all required pickup details.");
-
-        return;
-    }
-
-
-    result.style.display = "block";
-
-    result.innerHTML =
-        "⏳ Sending pickup request...";
+    button.textContent = "⏳ Requesting...";
 
 
     try {
+
+        const formData = new FormData(form);
 
         const response = await fetch("/pickup", {
 
             method: "POST",
 
-            headers: {
-                "Content-Type": "application/json"
-            },
-
-            body: JSON.stringify(data)
+            body: formData
 
         });
 
 
-        const responseData =
-            await response.json();
+        let data = {};
+
+        try {
+
+            data = await response.json();
+
+        } catch {
+
+            data = {};
+
+        }
 
 
-        if (!response.ok) {
+        if (!response.ok || data.success === false) {
 
-            result.innerHTML = `
+            throw new Error(
+                data.error || "Pickup request submit nahi ho paaya."
+            );
 
-                <div class="error">
+        }
 
-                    ❌ ${escapeHtml(
-                        responseData.error ||
-                        "Pickup request failed"
-                    )}
 
+        const pickupNumber =
+            data.pickup_number ||
+            data.request_number ||
+            data.id ||
+            "Generated";
+
+
+        const points =
+            data.points_earned ||
+            data.green_points ||
+            30;
+
+
+        setResult(
+            "pickupResult",
+
+            `
+                <div class="font-extrabold">
+                    ✅ Pickup Request Submitted
                 </div>
 
+                <div class="mt-2">
+                    Request Number:
+                    <strong>${escapeHtml(pickupNumber)}</strong>
+                </div>
+
+                <div class="mt-1">
+                    🌱 You earned <strong>${points} Green Points</strong>.
+                </div>
+            `,
+
+            "success"
+        );
+
+
+        showToast(
+            "Pickup request submitted!",
+            "success"
+        );
+
+
+        form.reset();
+
+        await loadDashboard();
+
+        await loadLeaderboard();
+
+
+    } catch (error) {
+
+        console.error(error);
+
+        setResult(
+            "pickupResult",
+            "❌ " + escapeHtml(error.message),
+            "error"
+        );
+
+        showToast(error.message, "error");
+
+    } finally {
+
+        button.disabled = false;
+
+        button.textContent = "🚚 Request Pickup";
+
+    }
+
+});
+
+
+/* =========================================================
+   TRACK COMPLAINT
+========================================================= */
+
+document.getElementById("trackForm").addEventListener("submit", async function (event) {
+
+    event.preventDefault();
+
+    const complaintNumber =
+        document.getElementById("trackNumber").value.trim();
+
+
+    if (!complaintNumber) {
+
+        showToast(
+            "Complaint number enter karein.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    try {
+
+        const response = await fetch(
+            "/track?complaint_number=" +
+            encodeURIComponent(complaintNumber)
+        );
+
+
+        const data = await response.json();
+
+
+        if (!response.ok || data.success === false) {
+
+            throw new Error(
+                data.error || "Complaint nahi mili."
+            );
+
+        }
+
+
+        const complaint =
+            data.complaint ||
+            data.report ||
+            data.data ||
+            data;
+
+
+        const status =
+            complaint.status || "Submitted";
+
+        const priority =
+            complaint.priority || "Normal";
+
+        const issue =
+            complaint.issue || "Waste Issue";
+
+        const location =
+            complaint.location || "Not available";
+
+        const created =
+            complaint.created_at || "Not available";
+
+        const description =
+            complaint.description || "";
+
+
+        let statusClass =
+            "bg-blue-100 text-blue-700";
+
+        if (status === "Resolved") {
+
+            statusClass =
+                "bg-green-100 text-green-700";
+
+        } else if (status === "In Progress") {
+
+            statusClass =
+                "bg-yellow-100 text-yellow-700";
+
+        }
+
+
+        setResult(
+            "trackResult",
+
+            `
+                <div class="border rounded-2xl p-5 bg-gray-50">
+
+                    <div class="flex flex-wrap justify-between gap-3">
+
+                        <div>
+                            <div class="text-xs text-gray-500">
+                                COMPLAINT NUMBER
+                            </div>
+
+                            <div class="font-extrabold text-lg">
+                                ${escapeHtml(
+                                    complaint.complaint_number ||
+                                    complaintNumber
+                                )}
+                            </div>
+                        </div>
+
+                        <span class="badge ${statusClass}">
+                            ${escapeHtml(status)}
+                        </span>
+
+                    </div>
+
+
+                    <div class="grid sm:grid-cols-2 gap-4 mt-5">
+
+                        <div>
+                            <div class="text-xs text-gray-500">
+                                ISSUE
+                            </div>
+
+                            <div class="font-bold mt-1">
+                                ${escapeHtml(issue)}
+                            </div>
+                        </div>
+
+
+                        <div>
+                            <div class="text-xs text-gray-500">
+                                PRIORITY
+                            </div>
+
+                            <div class="font-bold mt-1">
+                                ${escapeHtml(priority)}
+                            </div>
+                        </div>
+
+
+                        <div>
+                            <div class="text-xs text-gray-500">
+                                LOCATION
+                            </div>
+
+                            <div class="font-bold mt-1">
+                                ${escapeHtml(location)}
+                            </div>
+                        </div>
+
+
+                        <div>
+                            <div class="text-xs text-gray-500">
+                                CREATED
+                            </div>
+
+                            <div class="font-bold mt-1">
+                                ${escapeHtml(created)}
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    ${
+                        description
+                        ?
+                        `
+                            <div class="mt-5">
+
+                                <div class="text-xs text-gray-500">
+                                    DESCRIPTION
+                                </div>
+
+                                <div class="mt-1">
+                                    ${escapeHtml(description)}
+                                </div>
+
+                            </div>
+                        `
+                        :
+                        ""
+                    }
+
+                </div>
+            `,
+
+            "success"
+        );
+
+
+    } catch (error) {
+
+        console.error(error);
+
+        setResult(
+            "trackResult",
+            "❌ " + escapeHtml(error.message),
+            "error"
+        );
+
+    }
+
+});
+
+
+/* =========================================================
+   POINTS
+========================================================= */
+
+async function loadPoints() {
+
+    try {
+
+        const response = await fetch("/points");
+
+        const data = await response.json();
+
+        if (!response.ok || data.success === false) {
+            return;
+        }
+
+        const points =
+            Number(
+                data.points ||
+                data.green_points ||
+                data.total_points ||
+                0
+            );
+
+        currentPoints = points;
+
+        updatePointsUI(points);
+
+    } catch (error) {
+
+        console.log("Points API unavailable", error);
+
+    }
+
+}
+
+
+function updatePointsUI(points) {
+
+    setText("myPoints", points);
+
+    let level = "🌱 Green Beginner";
+
+    let percent = 0;
+
+    if (points >= 200) {
+
+        level = "🌍 Green Guardian";
+
+        percent = 100;
+
+    } else if (points >= 100) {
+
+        level = "🏆 Eco Hero";
+
+        percent = points - 100;
+
+    } else if (points >= 50) {
+
+        level = "🌿 Green Champion";
+
+        percent = (points - 50) * 2;
+
+    } else if (points >= 25) {
+
+        level = "♻️ Eco Helper";
+
+        percent = (points - 25) * 4;
+
+    } else {
+
+        level = "🌱 Green Beginner";
+
+        percent = points * 4;
+
+    }
+
+    percent = Math.max(0, Math.min(percent, 100));
+
+    setText("myLevel", level);
+
+    setText("levelProgressText", percent + "%");
+
+    document.getElementById("levelProgress").style.width =
+        percent + "%";
+
+}
+
+
+/* =========================================================
+   LEADERBOARD
+========================================================= */
+
+async function loadLeaderboard() {
+
+    const container =
+        document.getElementById("leaderboard");
+
+
+    try {
+
+        const response = await fetch("/leaderboard");
+
+        const data = await response.json();
+
+
+        if (!response.ok || data.success === false) {
+
+            throw new Error(
+                data.error || "Leaderboard unavailable"
+            );
+
+        }
+
+
+        const users =
+            data.leaderboard ||
+            data.users ||
+            data.data ||
+            [];
+
+
+        if (!users.length) {
+
+            container.innerHTML = `
+                <div class="text-gray-500 text-sm">
+                    No leaderboard data available yet.
+                </div>
             `;
 
             return;
         }
 
 
-        result.innerHTML = `
+        container.innerHTML = users
+            .slice(0, 10)
+            .map((user, index) => {
 
-            <div class="success">
+                const name =
+                    user.name ||
+                    user.username ||
+                    "Citizen";
 
-                ✅ Waste pickup request submitted!
+                const points =
+                    user.points ||
+                    user.green_points ||
+                    0;
 
-                <br><br>
+                const rank =
+                    index + 1;
 
-                Pickup Request Number:
 
-                <br>
+                let rankIcon = "🌱";
 
-                <strong style="font-size:22px;">
+                if (rank === 1) {
+                    rankIcon = "🥇";
+                } else if (rank === 2) {
+                    rankIcon = "🥈";
+                } else if (rank === 3) {
+                    rankIcon = "🥉";
+                }
 
-                    ${escapeHtml(
-                        responseData.request_number
-                    )}
 
-                </strong>
+                return `
+                    <div class="
+                        flex items-center justify-between
+                        rounded-xl p-4
+                        ${
+                            rank === 1
+                            ? "rank-1"
+                            : rank === 2
+                            ? "rank-2"
+                            : rank === 3
+                            ? "rank-3"
+                            : "bg-gray-50"
+                        }
+                    ">
 
-                <br><br>
+                        <div class="flex items-center gap-3">
 
-                Status: Requested
+                            <div class="text-xl">
+                                ${rankIcon}
+                            </div>
 
+                            <div>
+
+                                <div class="font-bold">
+                                    ${escapeHtml(name)}
+                                </div>
+
+                                <div class="text-xs text-gray-500">
+                                    Rank #${rank}
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="font-extrabold text-green-700">
+                            ${points} pts
+                        </div>
+
+                    </div>
+                `;
+
+            })
+            .join("");
+
+
+    } catch (error) {
+
+        console.log("Leaderboard error:", error);
+
+        container.innerHTML = `
+            <div class="text-gray-500 text-sm">
+                Leaderboard data will appear after citizens participate.
             </div>
-
-        `;
-
-    }
-
-    catch (error) {
-
-        result.innerHTML = `
-
-            <div class="error">
-
-                ❌ Server connection error.
-
-            </div>
-
         `;
 
     }
@@ -1085,41 +2560,45 @@ async function submitPickup() {
 }
 
 
+/* =========================================================
+   AI ANALYSIS
+========================================================= */
 
-/* =====================================================
-   TRACK COMPLAINT
-===================================================== */
+async function analyzeWithAI() {
 
-async function trackComplaint() {
+    const problem =
+        document.getElementById("aiProblem").value.trim();
 
-    const complaintNumber =
-
-        document.getElementById("complaintNumber")
-        .value
-        .trim();
-
-
-    const result =
-        document.getElementById("trackResult");
+    const domain =
+        document.getElementById("aiDomain").value;
 
 
-    if (!complaintNumber) {
+    if (problem.length < 10) {
 
-        alert("Please enter complaint number.");
+        showToast(
+            "Please describe the problem in at least 10 characters.",
+            "error"
+        );
 
         return;
     }
 
 
-    result.style.display = "block";
+    const button =
+        document.getElementById("aiAnalyzeBtn");
 
-    result.innerHTML =
-        "⏳ Searching complaint...";
+    const result =
+        document.getElementById("aiResult");
+
+
+    button.disabled = true;
+
+    button.textContent = "⏳ Analyzing...";
 
 
     try {
 
-        const response = await fetch("/track", {
+        const response = await fetch("/api/analyze", {
 
             method: "POST",
 
@@ -1129,335 +2608,590 @@ async function trackComplaint() {
 
             body: JSON.stringify({
 
-                complaint_number:
-                    complaintNumber
+                problem: problem,
+
+                domain: domain
 
             })
 
         });
 
 
-        const data =
-            await response.json();
+        const data = await response.json();
 
 
-        if (!response.ok) {
+        if (!response.ok || data.success === false) {
 
-            result.innerHTML = `
+            throw new Error(
+                data.error || "AI analysis failed."
+            );
 
-                <div class="error">
-
-                    ❌ ${escapeHtml(
-                        data.error ||
-                        "Complaint not found"
-                    )}
-
-                </div>
-
-            `;
-
-            return;
         }
 
 
-        const complaint =
-            data.complaint;
+        const solution =
+            data.solution || data.result || data;
 
+
+        let html = "";
+
+
+        if (typeof solution === "string") {
+
+            html = `
+                <div class="bg-green-50 border border-green-200 rounded-2xl p-5 whitespace-pre-wrap">
+                    ${escapeHtml(solution)}
+                </div>
+            `;
+
+        } else {
+
+            html = `
+                <div class="bg-green-50 border border-green-200 rounded-2xl p-5">
+
+                    <div class="font-extrabold text-xl text-green-900 mb-4">
+                        🤖 AI Analysis Complete
+                    </div>
+
+                    ${
+                        solution.summary
+                        ?
+                        `
+                            <div class="mb-4">
+                                <div class="font-bold text-green-800">
+                                    Problem Summary
+                                </div>
+
+                                <div class="mt-1 text-gray-700">
+                                    ${escapeHtml(solution.summary)}
+                                </div>
+                            </div>
+                        `
+                        :
+                        ""
+                    }
+
+
+                    ${
+                        solution.root_cause
+                        ?
+                        `
+                            <div class="mb-4">
+                                <div class="font-bold text-green-800">
+                                    Possible Cause
+                                </div>
+
+                                <div class="mt-1 text-gray-700">
+                                    ${escapeHtml(solution.root_cause)}
+                                </div>
+                            </div>
+                        `
+                        :
+                        ""
+                    }
+
+
+                    ${
+                        solution.recommendations
+                        ?
+                        `
+                            <div>
+                                <div class="font-bold text-green-800">
+                                    Recommended Actions
+                                </div>
+
+                                <div class="mt-2 text-gray-700 whitespace-pre-wrap">
+                                    ${escapeHtml(
+                                        Array.isArray(solution.recommendations)
+                                        ? solution.recommendations.join("\n• ")
+                                        : solution.recommendations
+                                    )}
+                                </div>
+                            </div>
+                        `
+                        :
+                        ""
+                    }
+
+
+                    ${
+                        solution.solution
+                        ?
+                        `
+                            <div class="mt-4 whitespace-pre-wrap text-gray-700">
+                                ${escapeHtml(solution.solution)}
+                            </div>
+                        `
+                        :
+                        ""
+                    }
+
+                </div>
+            `;
+
+        }
+
+
+        result.innerHTML = html;
+
+        result.classList.remove("hidden");
+
+        showToast(
+            "AI analysis completed!",
+            "success"
+        );
+
+
+    } catch (error) {
+
+        console.error(error);
 
         result.innerHTML = `
-
-            <div class="success">
-
-                <h3>
-
-                    ${escapeHtml(
-                        complaint.complaint_number
-                    )}
-
-                </h3>
-
-
-                <strong>Issue:</strong>
-
-                ${escapeHtml(
-                    complaint.issue
-                )}
-
-                <br><br>
-
-
-                <strong>Location:</strong>
-
-                ${escapeHtml(
-                    complaint.location
-                )}
-
-                <br><br>
-
-
-                <strong>Description:</strong>
-
-                ${escapeHtml(
-                    complaint.description ||
-                    "Not provided"
-                )}
-
-                <br><br>
-
-
-                <strong>Status:</strong>
-
-                ${escapeHtml(
-                    complaint.status
-                )}
-
-                <br><br>
-
-
-                <strong>Submitted:</strong>
-
-                ${escapeHtml(
-                    complaint.created_at
-                )}
-
+            <div class="bg-red-50 border border-red-200 text-red-700 rounded-2xl p-5">
+                ❌ ${escapeHtml(error.message)}
             </div>
-
         `;
 
-    }
+        result.classList.remove("hidden");
 
-    catch (error) {
+    } finally {
 
-        result.innerHTML = `
+        button.disabled = false;
 
-            <div class="error">
-
-                ❌ Server connection error.
-
-            </div>
-
-        `;
+        button.textContent = "🤖 Analyze Problem";
 
     }
 
 }
 
 
+/* =========================================================
+   ADMIN DATA
+========================================================= */
 
-/* =====================================================
-   AI WASTE ASSISTANT
-===================================================== */
+async function loadAdminData() {
 
-async function findSolution() {
-
-    const problem =
-
-        document.getElementById("problem")
-        .value
-        .trim();
+    const tableBody =
+        document.getElementById("adminTableBody");
 
 
-    const result =
-        document.getElementById("result");
-
-
-    const button =
-        document.getElementById("solveButton");
-
-
-    if (!problem) {
-
-        alert("Please describe a waste problem.");
-
-        return;
-    }
-
-
-    result.style.display = "block";
-
-
-    result.innerHTML = `
-
-        <div>
-
-            ⏳ AI is analyzing your waste problem...
-
-        </div>
-
+    tableBody.innerHTML = `
+        <tr>
+            <td colspan="6" class="p-8 text-center text-gray-500">
+                Loading...
+            </td>
+        </tr>
     `;
-
-
-    button.disabled = true;
-
-    button.innerText =
-        "⏳ Finding Solution...";
 
 
     try {
 
-        const response =
-            await fetch("/solve", {
+        const response = await fetch("/admin/data");
 
-                method: "POST",
-
-                headers: {
-
-                    "Content-Type":
-                        "application/json"
-
-                },
-
-                body: JSON.stringify({
-
-                    problem: problem
-
-                })
-
-            });
+        const data = await response.json();
 
 
-        const data =
-            await response.json();
+        if (!response.ok || data.success === false) {
+
+            throw new Error(
+                data.error || "Admin data unavailable."
+            );
+
+        }
 
 
-        if (!response.ok) {
+        const reports =
+            data.complaints ||
+            data.reports ||
+            data.data ||
+            [];
 
-            result.innerHTML = `
 
-                <div class="error">
+        if (!reports.length) {
 
-                    ❌ ${escapeHtml(
-
-                        data.error ||
-                        "AI service error"
-
-                    )}
-
-                </div>
-
-                ${
-                    data.details
-                    ?
-                    `
-
-                    <div style="margin-top:10px;">
-
-                        ${escapeHtml(
-                            data.details
-                        )}
-
-                    </div>
-
-                    `
-                    :
-                    ""
-                }
-
+            tableBody.innerHTML = `
+                <tr>
+                    <td
+                        colspan="6"
+                        class="p-8 text-center text-gray-500">
+                        No waste reports yet.
+                    </td>
+                </tr>
             `;
 
             return;
         }
 
 
-        result.innerHTML = `
+        tableBody.innerHTML = reports.map(report => {
 
-            <h3>💡 AI Waste Solution</h3>
+            const id =
+                report.complaint_number ||
+                report.id ||
+                "";
 
-            <div class="solution">
 
-                ${escapeHtml(
+            const status =
+                report.status || "Submitted";
 
-                    data.solution ||
 
-                    "No solution received."
+            const priority =
+                report.priority || "Normal";
 
-                )}
 
-            </div>
+            let priorityClass =
+                "bg-green-100 text-green-700";
 
-        `;
+            if (priority === "Critical") {
 
-    }
+                priorityClass =
+                    "bg-red-100 text-red-700";
 
-    catch (error) {
+            } else if (priority === "High") {
+
+                priorityClass =
+                    "bg-orange-100 text-orange-700";
+
+            } else if (priority === "Medium") {
+
+                priorityClass =
+                    "bg-yellow-100 text-yellow-700";
+
+            }
+
+
+            return `
+
+                <tr class="border-t hover:bg-gray-50">
+
+                    <td class="p-4">
+
+                        <div class="font-bold">
+                            ${escapeHtml(id)}
+                        </div>
+
+                        <div class="text-xs text-gray-500">
+                            ${escapeHtml(
+                                report.created_at || ""
+                            )}
+                        </div>
+
+                    </td>
+
+
+                    <td class="p-4">
+
+                        <div class="font-semibold">
+                            ${escapeHtml(
+                                report.name || "Citizen"
+                            )}
+                        </div>
+
+                        <div class="text-xs text-gray-500">
+                            ${escapeHtml(
+                                report.phone || ""
+                            )}
+                        </div>
+
+                    </td>
+
+
+                    <td class="p-4">
+
+                        <div class="font-semibold">
+                            ${escapeHtml(
+                                report.issue || "Waste Issue"
+                            )}
+                        </div>
+
+                        <div class="text-xs text-gray-500 max-w-xs truncate">
+                            ${escapeHtml(
+                                report.location || ""
+                            )}
+                        </div>
+
+                    </td>
+
+
+                    <td class="p-4">
+
+                        <span class="badge ${priorityClass}">
+                            ${escapeHtml(priority)}
+                        </span>
+
+                    </td>
+
+
+                    <td class="p-4">
+
+                        <select
+                            class="border rounded-lg px-2 py-2 text-xs"
+                            onchange="updateComplaintStatus('${escapeHtml(id)}', this.value)">
+
+                            <option
+                                value="Submitted"
+                                ${status === "Submitted" ? "selected" : ""}>
+                                Submitted
+                            </option>
+
+                            <option
+                                value="In Progress"
+                                ${status === "In Progress" ? "selected" : ""}>
+                                In Progress
+                            </option>
+
+                            <option
+                                value="Resolved"
+                                ${status === "Resolved" ? "selected" : ""}>
+                                Resolved
+                            </option>
+
+                        </select>
+
+                    </td>
+
+
+                    <td class="p-4">
+
+                        <select
+                            class="border rounded-lg px-2 py-2 text-xs"
+                            onchange="updateComplaintPriority('${escapeHtml(id)}', this.value)">
+
+                            <option
+                                value="Normal"
+                                ${priority === "Normal" ? "selected" : ""}>
+                                Normal
+                            </option>
+
+                            <option
+                                value="Medium"
+                                ${priority === "Medium" ? "selected" : ""}>
+                                Medium
+                            </option>
+
+                            <option
+                                value="High"
+                                ${priority === "High" ? "selected" : ""}>
+                                High
+                            </option>
+
+                            <option
+                                value="Critical"
+                                ${priority === "Critical" ? "selected" : ""}>
+                                Critical
+                            </option>
+
+                        </select>
+
+                    </td>
+
+                </tr>
+
+            `;
+
+        }).join("");
+
+
+    } catch (error) {
 
         console.error(error);
 
-
-        result.innerHTML = `
-
-            <div class="error">
-
-                ❌ Server se connection nahi ho raha.
-
-            </div>
-
-            <div style="margin-top:10px;">
-
-                Flask server check karo:
-
-                <br><br>
-
-                <b>
-                    http://127.0.0.1:5000
-                </b>
-
-            </div>
-
+        tableBody.innerHTML = `
+            <tr>
+                <td
+                    colspan="6"
+                    class="p-8 text-center text-red-600">
+                    ❌ ${escapeHtml(error.message)}
+                </td>
+            </tr>
         `;
 
     }
 
-    finally {
+}
 
-        button.disabled = false;
 
-        button.innerText =
-            "💡 Get AI Solution";
+/* =========================================================
+   ADMIN STATUS UPDATE
+========================================================= */
+
+async function updateComplaintStatus(
+    complaintNumber,
+    status
+) {
+
+    try {
+
+        const response = await fetch(
+            "/admin/update-status",
+            {
+
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+
+                    complaint_number:
+                        complaintNumber,
+
+                    status:
+                        status
+
+                })
+
+            }
+        );
+
+
+        const data = await response.json();
+
+
+        if (!response.ok || data.success === false) {
+
+            throw new Error(
+                data.error || "Status update failed."
+            );
+
+        }
+
+
+        showToast(
+            "Complaint status updated.",
+            "success"
+        );
+
+
+        await loadDashboard();
+
+        await loadPoints();
+
+        await loadLeaderboard();
+
+
+    } catch (error) {
+
+        console.error(error);
+
+        showToast(
+            error.message,
+            "error"
+        );
+
+        await loadAdminData();
 
     }
 
 }
 
 
+/* =========================================================
+   ADMIN PRIORITY UPDATE
+========================================================= */
 
-/* =====================================================
-   SECURITY / HTML ESCAPE
-===================================================== */
+async function updateComplaintPriority(
+    complaintNumber,
+    priority
+) {
 
-function escapeHtml(text) {
+    try {
 
-    return String(text).replace(
+        const response = await fetch(
+            "/admin/update-priority",
+            {
 
-        /[&<>"']/g,
+                method: "POST",
 
-        function(character) {
+                headers: {
+                    "Content-Type": "application/json"
+                },
 
-            const entities = {
+                body: JSON.stringify({
 
-                "&": "&amp;",
+                    complaint_number:
+                        complaintNumber,
 
-                "<": "&lt;",
+                    priority:
+                        priority
 
-                ">": "&gt;",
+                })
 
-                '"': "&quot;",
+            }
+        );
 
-                "'": "&#039;"
 
-            };
+        const data = await response.json();
 
-            return entities[character];
+
+        if (!response.ok || data.success === false) {
+
+            throw new Error(
+                data.error || "Priority update failed."
+            );
 
         }
 
-    );
+
+        showToast(
+            "Complaint priority updated.",
+            "success"
+        );
+
+
+        await loadDashboard();
+
+
+    } catch (error) {
+
+        console.error(error);
+
+        showToast(
+            error.message,
+            "error"
+        );
+
+        await loadAdminData();
+
+    }
 
 }
 
+
+/* =========================================================
+   INITIAL LOAD
+========================================================= */
+
+document.addEventListener("DOMContentLoaded", async function () {
+
+    console.log("🌿 GreenCare frontend loaded.");
+
+    await loadDashboard();
+
+    await loadPoints();
+
+    await loadLeaderboard();
+
+    await loadAdminData();
+
+
+    // Set minimum pickup date to today
+    const pickupDate =
+        document.getElementById("pickupDate");
+
+    if (pickupDate) {
+
+        const today =
+            new Date().toISOString().split("T")[0];
+
+        pickupDate.min = today;
+
+    }
+
+});
+
 </script>
 
-
 </body>
-
 </html>
